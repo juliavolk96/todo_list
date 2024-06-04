@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+    <title>To-Do List</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Welcome</h1>
+      <img src="./cat.png" class="header__image" alt="Welcome cat image" width="40" height="40">
+    </header>
+    <main class="main">
+      <section class="todo">
+        <h2 class="hidden">To-Do List</h2>
+        <div class="todo__header">
+          <form class="todo__form" id="todo-form">
+            <label for="todo-input" class="todo__label hidden">New task</label>
+            <div class="todo__input-group">
+              <input
+                type="text"
+                class="todo__input"
+                id="todo-input"
+                placeholder="Add your task"
+                aria-label="New task"
+              >
+              <button class="todo__button" type="submit" aria-label="Add task">
+                +
+              </button>
+            </div>
+          </form>
+          <div class="todo__content">
+            <ul class="todo__list" id="todo-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <a
+        href="https://github.com/juliavolk96/todo_list"
+        class="footer__copyright"
+        >© 2024 Julia Volkova
+      </a>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

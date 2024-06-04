@@ -1,0 +1,224 @@
+:root {
+  --primary-color: rgb(153, 131, 241);
+  --secondary-color: #7269f9;
+  --hover-color: #e88df8;
+  --background-color: rgba(31, 32, 43, 0.7);
+  --text-color: white;
+}
+
+body {
+  font-family: "Montserrat", sans-serif, arial;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh;
+  background-image: url('./backiee-289264-landscape.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-size: calc(1em + 0.1vw);
+  color: var(--text-color);
+}
+
+.hidden {
+  display: none;
+}
+
+a, button, li {
+  cursor: pointer;
+}
+
+h1, a, li {
+  color: var(--text-color);
+}
+
+h1 {
+  padding: 10px 0;
+  font-weight: normal;
+  font-size: 2em;
+}
+
+.header__image {
+  width: 40px;
+  height: 40px;
+}
+
+.header, .footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(17, 29, 44, 0.6);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(153, 131, 241, 0.5);
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 100%;
+  max-width: 600px;
+  height: calc(75vh + 0.3vw);
+  border-radius: 20px;
+  background-color: var(--background-color);
+}
+
+.todo__header {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo__input-group {
+  display: flex;
+  position: relative;
+}
+
+.todo__input {
+  flex-grow: 1;
+  border-radius: 35px;
+  height: 40px;
+  padding-right: 60px;
+  padding-left: 10px;
+  border: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  color: #333;
+  caret-color: var(--secondary-color);
+  outline: none;
+  font-size: 1rem;
+}
+
+.todo__input:focus {
+  box-shadow: 0 0 0 3px rgba(153, 131, 241, 0.5);
+}
+
+.todo__input::placeholder {
+  color: #ac9dee;
+}
+
+.todo__button {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 41px;
+  width: 55px;
+  border-radius: 35px;
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.todo__button:active {
+  background-color: var(--secondary-color);
+  color: var(--hover-color);
+}
+
+.todo__list {
+  overflow: auto;
+  max-height: calc((75vh + 0.3vw) - 100px);
+  margin-top: 20px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo__list::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+.todo__list::-webkit-scrollbar-thumb {
+  background-color: rgba(153, 131, 241, 0.5);
+  border-radius: 4px;
+}
+
+.todo__list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.todo__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  color: var(--text-color);
+  height: 50px;
+  transition: all 0.3s ease;
+}
+
+.task-text {
+  width: 85%;
+  font-size: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 5px;
+}
+
+.todo__input--edit {
+  border-radius: 35px;
+  border: none;
+  color: #ffffff;
+  caret-color: #ffffff;
+  outline: none;
+  background-color: transparent;
+}
+
+.todo__button--delete, .todo__button--edit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.todo__button--delete:hover, .todo__button--edit:hover {
+  transform: scale(1.1);
+}
+
+.todo__button--delete:active, .todo__button--edit:active {
+  transform: scale(0.9);
+}
+
+.footer {
+  padding: 15px 0;
+  border-top: 1px solid rgba(153, 131, 241, 0.5);
+}
+
+.footer__copyright {
+  font-size: 1em;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.footer__copyright:hover {
+  color: #df92e7;
+}
+
+.todo__item--completed {
+  text-decoration: line-through;
+  color: #bbb0db;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
