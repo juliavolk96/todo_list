@@ -13,10 +13,11 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 100vh;
-  background-image: url('./backiee-289264-landscape.jpg');
+  height: 100%;
+  background: linear-gradient(135deg, #5349d7, #826cf3, #aa8fdc);
   background-repeat: no-repeat;
   background-size: cover;
+  background-image: url('./backiee-289264-landscape.jpg');
   background-position: center;
   font-size: calc(1em + 0.1vw);
   color: var(--text-color);
@@ -64,18 +65,19 @@ h1 {
   height: 100%;
   display: flex;
   justify-content: center;
-  padding: 10px 0;
+  align-items: center;
 }
 
+/*To-Do form*/
 .todo {
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 25px 15px 15px 15px;
   width: 100%;
   max-width: 600px;
-  height: calc(75vh + 0.3vw);
   border-radius: 20px;
   background-color: var(--background-color);
+  margin: 10px;
 }
 
 .todo__header {
@@ -83,6 +85,7 @@ h1 {
   flex-direction: column;
 }
 
+/*Input*/
 .todo__input-group {
   display: flex;
   position: relative;
@@ -130,6 +133,8 @@ h1 {
   color: var(--hover-color);
 }
 
+
+/* ToDo List*/
 .todo__list {
   overflow: auto;
   max-height: calc((75vh + 0.3vw) - 100px);
