@@ -28,13 +28,25 @@
                 placeholder="Add your task"
                 aria-label="New task"
               >
-              <button class="todo__button" type="submit" aria-label="Add task">
+              <button id="todo-submit-button" class="todo__button" type="submit" aria-label="Add task">
                 +
               </button>
             </div>
           </form>
           <div class="todo__content">
-            <ul class="todo__list" id="todo-list"></ul>
+            <ul class="todo__list" id="todo-list">
+              <template id="todo-item-template">
+                <li class="todo__item" role="listitem">
+                  <span class="task-text"></span>
+                  <button class="todo__button--edit" aria-label="Edit task">
+                    <img src="./pencil.png" alt="Edit" width="20" height="20" class="todo__icon--edit">
+                  </button>
+                  <button class="todo__button--delete" aria-label="Delete task">
+                    <img src="./trashbin.png" alt="Delete" width="20" height="20" class="todo__icon--delete">
+                  </button>
+                </li>
+              </template>
+            </ul>
           </div>
         </div>
       </section>
@@ -46,7 +58,9 @@
         >© 2024 Julia Volkova
       </a>
     </footer>
-    <script src="script.js"></script>
-    <script src="todoList.js"></script>
+    <script type="module" src="todoList.js"></script>
+    <script type="module" src="domUtils.js"></script>
+    <script type="module" src="form.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

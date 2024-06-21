@@ -1,33 +1,43 @@
 class TodoList {
   constructor() {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    this.tasks = storedTasks;
+    this.tasks = new Map(storedTasks.map(task => [task.id, task]));
+    this.lastId = localStorage.getItem("lastId") || 0;
   }
 
-  addTask(text, completed) {
-    this.tasks.push({ text, completed });
+  // Adds a new task to the TodoList & saves to localStorage
+  addTask(text, completed = false) {
+    const id = ++this.lastId;
+    this.tasks.set(id, { id, text, completed });
     this.saveTasksToLocalStorage();
+    return id;
   }
 
+  // Saves the current list of tasks to localStorage
   saveTasksToLocalStorage() {
-    localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    localStorage.setItem("tasks", JSON.stringify(Array.from(this.tasks.values())));
+    localStorage.setItem("lastId", this.lastId);
   }
 
+  // Retrieves all tasks from the TodoList
   getTasks() {
-    return this.tasks;
+    return Array.from(this.tasks.values());
   }
 
-  removeTask(text) {
-    this.tasks = this.tasks.filter((task) => task.text !== text);
+  // Removes a task from the TodoList by ID & saves to localStorage
+  removeTask(id) {
+    this.tasks.delete(id);
     this.saveTasksToLocalStorage();
   }
 
-  // Toggle the completion status of a task
-  toggleTask(text) {
-    const taskIndex = this.tasks.findIndex((task) => task.text === text);
-    if (taskIndex !== -1) {
-      this.tasks[taskIndex].completed = !this.tasks[taskIndex].completed;
+  // Toggles the completion status of a task & saves to localStorage
+  toggleTask(id) {
+    const task = this.tasks.get(id);
+    if (task) {
+      task.completed = !task.completed;
       this.saveTasksToLocalStorage();
     }
   }
 }
+
+export default TodoList;
