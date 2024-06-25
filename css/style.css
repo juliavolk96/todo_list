@@ -17,7 +17,7 @@ body {
   background: linear-gradient(135deg, #5349d7, #826cf3, #aa8fdc);
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url('./backiee-289264-landscape.jpg');
+  background-image: url('../images/backiee-289264-landscape.jpg');
   background-position: center;
   font-size: calc(1em + 0.1vw);
   color: var(--text-color);
