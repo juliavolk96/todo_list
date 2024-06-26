@@ -31,16 +31,19 @@ class Form {
     const text = this.input.value.trim();
     if (!text) return;
 
-    this.todoList.addTask(text);
-    const addedTask = this.todoList.getTasks().at(-1);
-    this.domUtils.addTaskToList(addedTask.id, addedTask.text, addedTask.completed);
+    try {
+      const addedTask = this.todoList.addTask(text);
+      this.domUtils.addTaskToList(addedTask);
 
-    this.input.value = "";
-    this.button.disabled = true;
+      this.input.value = "";
+      this.button.disabled = true;
 
-    setTimeout(() => {
-      this.input.focus();
-    }, 0);
+      setTimeout(() => {
+        this.input.focus();
+      }, 0);
+    } catch (error) {
+      console.error("Error adding task:", error.message);
+    }
   }
 }
 

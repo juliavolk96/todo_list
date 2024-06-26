@@ -35,13 +35,12 @@ class DomUtils {
     requestAnimationFrame(focusInput);
   
     return input;
-  }  
+  }
 
   // Saves changes made to a task after editing
   saveTaskChanges(input, taskText, todoItem, id) {
     const newText = input.value;
-    const tasks = this.todoList.getTasks();
-    const task = tasks.find((task) => task.id === id);
+    const task = this.todoList.getTaskById(id);
     if (task) {
       task.text = newText;
       this.todoList.saveTasksToLocalStorage();
@@ -63,14 +62,14 @@ class DomUtils {
    * Adds a new task item to the todo list UI
    * Sets up event listeners for edit and delete actions
   **/
-  addTaskToList(id, text, completed) {
+  addTaskToList(task) {
     const clone = document.importNode(this.template.content, true);
     const taskText = clone.querySelector(".task-text");
-    taskText.textContent = text;
+    taskText.textContent = task.text;
 
     const todoItem = clone.querySelector(".todo__item");
-    todoItem.setAttribute("data-id", id);
-    this.updateTaskStyles(todoItem, completed);
+    todoItem.setAttribute("data-id", task.id);
+    this.updateTaskStyles(todoItem, task.completed);
 
     const editButton = clone.querySelector(".todo__button--edit");
     const deleteButton = clone.querySelector(".todo__button--delete");
@@ -80,7 +79,7 @@ class DomUtils {
       const input = this.createEditInput(taskText, () => {
         if (isSaving) return;
         isSaving = true;
-        this.saveTaskChanges(input, taskText, todoItem, id);
+        this.saveTaskChanges(input, taskText, todoItem, task.id);
         isSaving = false;
       });
 
@@ -91,7 +90,7 @@ class DomUtils {
 
     deleteButton.addEventListener("click", (event) => {
       event.stopPropagation();
-      this.todoList.removeTask(id);
+      this.todoList.removeTask(task.id);
       this.list.removeChild(todoItem);
     });
 

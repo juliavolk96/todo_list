@@ -1,4 +1,4 @@
-import TodoList from './todoList.js';
+import todoList from './todoList.js';
 import DomUtils from './domUtils.js';
 import Form from './form.js';
 
@@ -9,7 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("todo-submit-button");
   const template = document.getElementById("todo-item-template");
 
-  const todoList = new TodoList();
+  if (!form || !input || !list || !button || !template) {
+    throw new Error("Required elements not found on the page");
+  }
+
   const domUtils = new DomUtils(template, list, todoList);
 
   new Form(form, input, button, todoList, domUtils);
@@ -24,14 +27,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Toggle task completion status if task text is clicked
     if (target.classList.contains("task-text")) {
-      const task = todoList.getTasks().find((task) => task.id === taskId);
-      todoList.toggleTask(taskId);
-      domUtils.updateTaskStyles(todoItem, task.completed);
+      const task = todoList.getTaskById(taskId);
+      if (task) {
+        todoList.toggleTask(taskId);
+        domUtils.updateTaskStyles(todoItem, task.completed);
+      } else {
+        console.error(`Task with ID ${taskId} not found.`);
+      }
     }
   });
 
   // Render existing tasks in the list
   todoList.getTasks().forEach((task) => {
-    domUtils.addTaskToList(task.id, task.text, task.completed);
+    domUtils.addTaskToList(task);
   });
 });
