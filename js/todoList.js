@@ -30,26 +30,25 @@ class TodoList {
   }
 
   // Retrieves a task by ID
-  getTaskById(id) {
-    return this.tasks.get(id);
+  getTask(task) {
+    return this.tasks.get(task.id);
   }
 
   // Removes a task from the TodoList by ID & saves to localStorage
-  removeTask(id) {
-    if (!this.tasks.has(id)) {
-      throw new Error(`Task with ID ${id} not found.`);
+  removeTask(task) {
+    if (!this.tasks.has(task.id)) {
+      throw new Error(`Task with ID ${task.id} not found.`);
     }
     
-    this.tasks.delete(id);
+    this.tasks.delete(task.id);
     this.saveTasksToLocalStorage();
   }
 
   // Toggles the completion status of a task & saves to localStorage
-  toggleTask(id) {
-    const task = this.tasks.get(id);
-
-    if (task) {
-      task.completed = !task.completed;
+  toggleTask(task) {
+    const storedTask = this.tasks.get(task.id);
+    if (storedTask) {
+      storedTask.completed = !storedTask.completed;
       this.saveTasksToLocalStorage();
     }
   }

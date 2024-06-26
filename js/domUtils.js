@@ -38,15 +38,18 @@ class DomUtils {
   }
 
   // Saves changes made to a task after editing
-  saveTaskChanges(input, taskText, todoItem, id) {
-    const newText = input.value;
-    const task = this.todoList.getTaskById(id);
-    if (task) {
-      task.text = newText;
-      this.todoList.saveTasksToLocalStorage();
-      taskText.textContent = newText;
+  saveTaskChanges(input, taskText, todoItem, task) {
+    try {
+      const newText = input.value;
+      if (task) {
+        task.text = newText;
+        this.todoList.saveTasksToLocalStorage();
+        taskText.textContent = newText;
+      }
+      todoItem.replaceChild(taskText, input);
+    } catch (error) {
+      console.error("Error while saving task changes:", error);
     }
-    todoItem.replaceChild(taskText, input);
   }
 
   // Updates the visual style of a task
@@ -79,7 +82,7 @@ class DomUtils {
       const input = this.createEditInput(taskText, () => {
         if (isSaving) return;
         isSaving = true;
-        this.saveTaskChanges(input, taskText, todoItem, task.id);
+        this.saveTaskChanges(input, taskText, todoItem, task);
         isSaving = false;
       });
 
@@ -89,9 +92,13 @@ class DomUtils {
     });
 
     deleteButton.addEventListener("click", (event) => {
-      event.stopPropagation();
-      this.todoList.removeTask(task.id);
-      this.list.removeChild(todoItem);
+      try {
+        event.stopPropagation();
+        this.todoList.removeTask(task);
+        this.list.removeChild(todoItem);
+      } catch (error) {
+        console.error("Error while deleting task:", error);
+      }
     });
 
     this.list.insertBefore(clone, this.list.firstChild);

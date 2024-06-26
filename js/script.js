@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!todoItem) return;
 
     const taskId = parseInt(todoItem.getAttribute("data-id"), 10);
+    const task = todoList.getTask({ id: taskId });
 
     // Toggle task completion status if task text is clicked
     if (target.classList.contains("task-text")) {
-      const task = todoList.getTaskById(taskId);
       if (task) {
-        todoList.toggleTask(taskId);
+        todoList.toggleTask(task);
         domUtils.updateTaskStyles(todoItem, task.completed);
       } else {
         console.error(`Task with ID ${taskId} not found.`);
